@@ -74,7 +74,7 @@ export default {
       for (let i = 0; i < this.checkedValue.length; i++) {
         console.log(this.checkedValue[i])
         console.log(this.$store.state.current[i].answer)
-        if (this.checkedValue[i] === (this.$store.state.current[i].answer-65)) {
+        if (this.checkedValue[i] === (this.$store.state.current[i].answer - 65)) {
           score += 20
         }
       }
@@ -86,6 +86,10 @@ export default {
       this.$store.state.isSubmit = false
       let list = this.getRandomArrayElements(this.$store.state.problems[this.id][this.index], 5)
       this.$store.commit('setCurrent', list)
+      for (let i = 0; i < this.checkedValue.length; i++) {
+        this.checkedValue[i] = false
+      }
+      this.$root.reload()
     },
     getRandomArrayElements(arr, count) {
       let shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
@@ -96,6 +100,10 @@ export default {
         shuffled[i] = temp
       }
       return shuffled.slice(min);
+    },
+    reload() {
+      this.isRouterAlive = false
+      this.$nextTick(() => (this.isRouterAlive = true))
     }
   },
   data() {
