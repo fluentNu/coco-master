@@ -1,0 +1,145 @@
+<template>
+  <div style="margin-left: 20px;">
+    <h1>ch{{ Number(index) + 1 }}</h1>
+    <div v-for="(pro,index) in this.$store.state.current" :key="pro.id">
+      <p class="content">{{ index + 1 }}. {{ pro.content }}</p>
+      <label>
+        <div class="item">
+          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=0 v-model="checkedValue[index]">
+          A. {{ pro.A }}
+        </div>
+      </label>
+      <br>
+      <label>
+        <div class="item">
+          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=1 v-model="checkedValue[index]">
+          B. {{ pro.B }}
+        </div>
+      </label>
+      <br>
+      <label>
+        <div class="item">
+          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=2 v-model="checkedValue[index]">
+          C. {{ pro.C }}
+        </div>
+      </label>
+      <br>
+      <label>
+        <div class="item">
+          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=3 v-model="checkedValue[index]">
+          D. {{ pro.D }}
+        </div>
+      </label>
+      <br>
+      <div v-if="this.$store.state.isSubmit">
+        <div class="explain">
+          correct answer：{{ pro.answer }}
+        </div>
+        <div class="explain">
+          Explanation：{{ pro.explanation }}
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <div style="margin-bottom: 20px; margin-left: 30px;">
+    <button v-if="!this.$store.state.isSubmit" type="button" class="btn btn-primary" style="margin-bottom: 20px;"
+            @click="submit">Submit
+    </button>
+    <button v-if="this.$store.state.isSubmit" style="margin-bottom: 15px;" type="button" class="btn btn-success"
+            @click="getMore">More
+      Problems
+    </button>
+    <div v-if="this.$store.state.isSubmit">
+      <p>reference：<a href="www.google.com">1</a></p>
+      <p><a href="www.google.com">2</a></p>
+      <p>watch this chapter video again：<a href="www.google.com">video</a></p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Problem",
+  props: ['index', 'id', 'isSubmit'],
+  methods: {
+    submit() {
+      for (let i = 0; i < this.checkedValue.length; i++) {
+        if (this.checkedValue[i] === false) {
+          alert("Please complete all questions!")
+          return
+        }
+      }
+      let score = 0
+      for (let i = 0; i < this.checkedValue.length; i++) {
+        console.log(this.checkedValue[i])
+        console.log(this.$store.state.current[i].answer)
+        if (this.checkedValue[i] === (this.$store.state.current[i].answer-65)) {
+          score += 20
+        }
+      }
+      console.log(score)
+      this.$store.state.isSubmit = true
+      alert("submit success")
+    },
+    getMore() {
+      this.$store.state.isSubmit = false
+      let list = this.getRandomArrayElements(this.$store.state.problems[this.id][this.index], 5)
+      this.$store.commit('setCurrent', list)
+    },
+    getRandomArrayElements(arr, count) {
+      let shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+      while (i-- > min) {
+        index = Math.floor((i + 1) * Math.random())
+        temp = shuffled[index]
+        shuffled[index] = shuffled[i]
+        shuffled[i] = temp
+      }
+      return shuffled.slice(min);
+    }
+  },
+  data() {
+    return {
+      checkedValue: [
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+}
+</script>
+
+<style scoped>
+.content {
+  font-size: 15px;
+  line-height: 25px;
+  margin-left: 5px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.item {
+  padding-left: 15px;
+  line-height: 40px;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.item:hover {
+  cursor: default;
+  background-color: #f4f4f5;
+}
+
+.explain {
+  padding-left: 15px;
+  line-height: 40px;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+</style>
