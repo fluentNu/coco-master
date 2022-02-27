@@ -1774,6 +1774,27 @@ export default createStore({
                 ],
             ],
         ],
+        url:[
+            //Cyber Security
+            [
+                //ch1-5
+                'https://www.google.com',
+                'https://www.ch2.com',
+                'https://www.ch3.com',
+                'https://www.ch4.com',
+                'https://www.ch5.com',
+            ],
+            //Data Science
+            [],
+            //Big Data
+            [],
+            //Machine Learning and AI
+            [],
+            //Web Development
+            [],
+            //Metaverse
+            [],
+            ],
         current: [],
         isSubmit:false,
     },
