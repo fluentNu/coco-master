@@ -53,7 +53,7 @@
     <div v-if="this.$store.state.isSubmit">
       <p>Your score: {{score}}</p>
       <p>reference:<a :href="this.$store.state.url[this.id][this.index]">1</a></p>
-      <p>watch this chapter video again:<a href="www.google.com">video</a></p>
+      <p>watch this chapter video again:<a :href="this.$store.state.video[this.id][this.index]">video</a></p>
     </div>
   </div>
 </template>
