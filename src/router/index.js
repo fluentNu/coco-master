@@ -9,7 +9,8 @@ import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import MyCourses from '../views/UserCourses.vue'
 import Quiz from '../views/Quiz'
-import Problem from "../views/Problem";
+import Problem from "../views/Problem"
+import Introduction from "@/views/Introduction"
 
 const routes = [
     {
@@ -68,6 +69,15 @@ const routes = [
             title: 'Master CS | My Courses'
         }
     },
+    {
+        path: '/Introduction',
+        name: 'Introduction',
+        component: Introduction,
+        meta: {
+            title: 'Master CS | Introduction Quiz'
+        }
+    },
+
     {
         path: '/Quiz',
         name: 'Quiz',

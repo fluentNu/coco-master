@@ -64,10 +64,8 @@ export default {
   props: ['index', 'id', 'isSubmit'],
   methods: {
     submit() {
-      console.log(this.checkedValue)
       for (let i = 0; i < this.checkedValue.length; i++) {
         if (this.checkedValue[i] === 4) {
-          console.log(this.checkedValue[i])
           alert("Please complete all questions!")
           return
         }
@@ -78,7 +76,6 @@ export default {
           score += 20
         }
       }
-      console.log(score)
       this.score=score
       this.$store.state.isSubmit = true
       alert("submit success")

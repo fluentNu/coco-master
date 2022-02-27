@@ -6,7 +6,7 @@
 			<router-link to="/">
 				<h1 class="logo me-auto">Master CS</h1>
 			</router-link>
-			<ul> 
+			<ul>
 				<router-link to="/"> Home </router-link>
 				<router-link to="/courses"> Courses </router-link>
 				<router-link to="/events"> Events </router-link>
@@ -15,6 +15,7 @@
 					<router-link to="/profile"> Profile </router-link>
 					<router-link to="/achievements"> Achievements </router-link>
 					<router-link to=/MyCourses> My Courses </router-link>
+          <router-link to=/Introduction> Introduction Quiz </router-link>
 				</ul>
 				</li>
 				<router-link to="Login">
@@ -34,7 +35,7 @@ export default {
 	},
 	setup() {
 		return {
-			
+
 		}
 	},
 }
