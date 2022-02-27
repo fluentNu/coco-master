@@ -51,9 +51,10 @@
       Problems
     </button>
     <div v-if="this.$store.state.isSubmit">
-      <p>reference：<a href="www.google.com">1</a></p>
+      <p>Your score: {{score}}</p>
+      <p>reference:<a href="www.google.com">1</a></p>
       <p><a href="www.google.com">2</a></p>
-      <p>watch this chapter video again：<a href="www.google.com">video</a></p>
+      <p>watch this chapter video again:<a href="www.google.com">video</a></p>
     </div>
   </div>
 </template>
@@ -65,20 +66,19 @@ export default {
   methods: {
     submit() {
       for (let i = 0; i < this.checkedValue.length; i++) {
-        if (this.checkedValue[i] === false) {
+        if (this.checkedValue[i] === 4) {
           alert("Please complete all questions!")
           return
         }
       }
       let score = 0
       for (let i = 0; i < this.checkedValue.length; i++) {
-        console.log(this.checkedValue[i])
-        console.log(this.$store.state.current[i].answer)
-        if (this.checkedValue[i] === (this.$store.state.current[i].answer - 65)) {
+        if (this.map[this.checkedValue[i]] === (this.$store.state.current[i].answer)) {
           score += 20
         }
       }
       console.log(score)
+      this.score=score
       this.$store.state.isSubmit = true
       alert("submit success")
     },
@@ -89,7 +89,7 @@ export default {
       for (let i = 0; i < this.checkedValue.length; i++) {
         this.checkedValue[i] = false
       }
-      this.$root.reload()
+      // this.$root.reload()
     },
     getRandomArrayElements(arr, count) {
       let shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
@@ -109,12 +109,16 @@ export default {
   data() {
     return {
       checkedValue: [
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
+      ],
+      list:[
+          4,
+          4,
+          4,
+          4,
+          4,
+      ],
+      map:['A','B','C','D'],
+      score:0,
     }
   },
 }
