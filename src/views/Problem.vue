@@ -1,32 +1,32 @@
 <template>
   <div style="margin-left: 20px;">
     <h1>ch{{ Number(index) + 1 }}</h1>
-    <div v-for="(pro,index) in this.$store.state.current" :key="pro.id">
-      <p class="content">{{ index + 1 }}. {{ pro.content }}</p>
+    <div v-for="(pro,idx) in this.$store.state.current" :key="pro.id">
+      <p class="content">{{ idx + 1 }}. {{ pro.content }}</p>
       <label>
         <div class="item">
-          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=0 v-model="checkedValue[index]">
+          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=0 v-model="checkedValue[idx]">
           A. {{ pro.A }}
         </div>
       </label>
       <br>
       <label>
         <div class="item">
-          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=1 v-model="checkedValue[index]">
+          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=1 v-model="checkedValue[idx]">
           B. {{ pro.B }}
         </div>
       </label>
       <br>
       <label>
         <div class="item">
-          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=2 v-model="checkedValue[index]">
+          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=2 v-model="checkedValue[idx]">
           C. {{ pro.C }}
         </div>
       </label>
       <br>
       <label>
         <div class="item">
-          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=3 v-model="checkedValue[index]">
+          <input style="margin-right: 8px;" type="radio" :name="pro.id" :value=3 v-model="checkedValue[idx]">
           D. {{ pro.D }}
         </div>
       </label>
@@ -64,8 +64,10 @@ export default {
   props: ['index', 'id', 'isSubmit'],
   methods: {
     submit() {
+      console.log(this.checkedValue)
       for (let i = 0; i < this.checkedValue.length; i++) {
         if (this.checkedValue[i] === 4) {
+          console.log(this.checkedValue[i])
           alert("Please complete all questions!")
           return
         }
@@ -108,8 +110,6 @@ export default {
   data() {
     return {
       checkedValue: [
-      ],
-      list:[
           4,
           4,
           4,
